@@ -22,7 +22,8 @@ class Inventario:
         else:
             print("la lista de los productos si está en el inventario")
             for producto in self.productos:
-                print(f"id:{producto.id}, Nombre: {producto.nombre}, Cantidad: {producto.cantidad}, Precio: {producto.precio}")
+                print(
+                    f"id:{producto.id}, Nombre: {producto.nombre}, Cantidad: {producto.cantidad}, Precio: {producto.precio}")
 
     def guardar_en_archivo(self, nombre_archivo="inventario_S10.txt"):
         try:
@@ -36,9 +37,7 @@ class Inventario:
     def cargar_desde_archivo(self, nombre_archivo="inventario_S10.txt"):
         try:
             with open(nombre_archivo, "r") as archivo:
-                print(f"leyendo archivo...")
                 for linea in archivo:
-                    print(f"linea leida: {linea.strip()}")
                     datos = [dato.strip() for dato in linea.strip().split(",")]
                     if len(datos) == 4:
                         id, nombre, cantidad, precio = datos
@@ -47,7 +46,17 @@ class Inventario:
         except FileNotFoundError:
             print("Hubo un error al cargar su archivo desde la pc, se inicia el inventario vacio")
         except ValueError:
-            print("Hubo un error al leer los datos del archivo desde su pc, verifique el formato del archivo")
+            print("Hubo un error al leer los datos del archivo desde su pc, verifique el fotmato del archivo")
+
+inventario = Inventario()
+inventario.agregar_producto(Producto(1, "Celular", 2, 1400))
+inventario.agregar_producto(Producto(2, "Reloj", 4, 200))
+inventario.agregar_producto(Producto(3, "Cámara", 1, 16.06))
+inventario.agregar_producto(Producto(4, "Goku", 1, 20))
 
 
+inventario.guardar_en_archivo()
 
+inventario_nuevo = Inventario()
+
+inventario_nuevo.mostrar_productos()
